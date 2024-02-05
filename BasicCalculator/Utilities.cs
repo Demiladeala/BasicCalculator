@@ -59,16 +59,33 @@ namespace BasicCalculator
             
         }
 
+        private static double GetValidNumber(string prompt)
+        {
+            double number;
+            bool isValid = false;
+
+            do
+            {
+                Console.Write(prompt);
+                string userInput = Console.ReadLine();
+
+                isValid = double.TryParse(userInput, out number);
+
+                if (!isValid)
+                {
+                    Console.WriteLine("Invalid input. Please enter a valid number.");
+                }
+
+            } while (!isValid);
+
+            return number;
+        }
+
         public static void AdditionCalculation()
         {
-            double inputOne = 0;
-            double inputTwo = 0;
+            double inputOne = GetValidNumber("Enter first number: ");
+            double inputTwo = GetValidNumber("Enter Second number: ");
             double result;
-
-            Console.WriteLine("Enter first number: ");
-            inputOne = Convert.ToDouble(Console.ReadLine());
-            Console.WriteLine("Enter Second number: ");
-            inputTwo = Convert.ToDouble(Console.ReadLine());
 
             Calculate addition = new Calculate();
             result = addition.Addition(inputOne, inputTwo);
